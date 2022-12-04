@@ -25,7 +25,7 @@ RUN \
     && if [ "${BUILD_ARCH}" = "i386" ]; then ARCH="386"; fi \
     \
     && curl -L -s \
-        "https://pkgs.tailscale.com/stable/tailscale_1.30.1_${ARCH}.tgz" \
+        "https://pkgs.tailscale.com/stable/tailscale_1.32.3_${ARCH}.tgz" \
         | tar zxvf - -C /opt/ --strip-components 1 \
     \
     && rm -f -r \
@@ -50,13 +50,12 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="Franck Nijhof <frenck@addons.community>" \
+    maintainer="Tom Dalbo <code@dalbo.net>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Community Add-ons" \
-    org.opencontainers.image.authors="Franck Nijhof <frenck@addons.community>" \
+    org.opencontainers.image.authors="Tom Dalbo <code@dalbo.net>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://addons.community" \
     org.opencontainers.image.source="https://github.com/${BUILD_REPOSITORY}" \
     org.opencontainers.image.documentation="https://github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
