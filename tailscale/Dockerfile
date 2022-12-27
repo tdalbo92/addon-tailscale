@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base/amd64:12.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base/aarch64:12.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -6,14 +6,15 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-ARG BUILD_ARCH=amd64
+ARG BUILD_ARCH=aarch64
+RUN apk update
 RUN \
     apk add --no-cache \
         ip6tables=1.8.8-r1 \
         ipcalc=1.0.1-r0 \
         iproute2=5.17.0-r0 \
         iptables=1.8.8-r1 \
-        nginx=1.22.0-r1 \
+        nginx=1.22.1-r0 \
     \
     && ln -sf /sbin/xtables-nft-multi /sbin/ip6tables \
     && ln -sf /sbin/xtables-nft-multi /sbin/iptables \
@@ -25,7 +26,7 @@ RUN \
     && if [ "${BUILD_ARCH}" = "i386" ]; then ARCH="386"; fi \
     \
     && curl -L -s \
-        "https://pkgs.tailscale.com/stable/tailscale_1.32.3_${ARCH}.tgz" \
+        "https://pkgs.tailscale.com/stable/tailscale_1.34.1_${ARCH}.tgz" \
         | tar zxvf - -C /opt/ --strip-components 1 \
     \
     && rm -f -r \
@@ -35,13 +36,13 @@ RUN \
 COPY rootfs /
 
 # Build arguments
-ARG BUILD_ARCH
-ARG BUILD_DATE
-ARG BUILD_DESCRIPTION
-ARG BUILD_NAME
-ARG BUILD_REF
-ARG BUILD_REPOSITORY
-ARG BUILD_VERSION
+ARG BUILD_ARCH=aarch64
+ARG BUILD_DATE=2022-12-01T13:35:00Z
+ARG BUILD_DESCRIPTION=Zero config VPN for building secure networks
+ARG BUILD_NAME=Tailscale
+ARG BUILD_REF=331d553a5eb90401c071021bae5dd24ce3993500
+ARG BUILD_REPOSITORY=tdalbo92/addon-tailscale
+ARG BUILD_VERSION=331d553
 
 # Labels
 LABEL \

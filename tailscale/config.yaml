@@ -4,7 +4,6 @@ version: dev
 slug: tailscale
 description: Zero config VPN for building secure networks
 url: https://github.com/tdalbo92/addon-tailscale
-codenotary: code@dalbo.net
 ingress: true
 ingress_port: 0
 ingress_stream: true
